@@ -16,7 +16,7 @@ moment = require 'moment'
 priceThreshold = 7
 
 module.exports = (robot) =>
-  robot.respond /spoonrocket( (sf|eastbay)?)?$/i, (msg) ->
+  robot.respond /feed me( (sf|eastbay)?)?$/i, (msg) ->
     location = if msg.match[1] then msg.match[1].trim() else 'eastbay'
     now = moment().format('HH:MM')
 
@@ -51,14 +51,14 @@ module.exports = (robot) =>
 
         messages = []
         index = 1
-        for entry in resp.menu when entry.price > priceThreshold && !entry.sold_out_for_the_day && !entry.sold_out_temporarily
-          item = '· ' + entry.name + ' ($' + entry.price + '): ' + entry.description + ' (' + entry.properties + ')'
-          if entry.qty <= 0 || entry.sold_out_for_the_day
-            item += ' [SOLD OUT]'
-          else if entry.sold_out_temporarily
-            item += ' [Temporarily sold out]'
-          else if entry.qty <= 10
-            item += ' [Almost sold out!]'
+        for entry in resp.menu when entry.price > priceThreshold && !entry.sold_out_for_the_day && !entry.sold_out_temporarily && entry.name.indexOf("T-Shirt") == -1
+          # item = '· ' + entry.name + ' ($' + entry.price + '): ' + entry.description + ' (' + entry.properties + ')'
+          # if entry.qty <= 0 || entry.sold_out_for_the_day
+          #   item += ' [SOLD OUT]'
+          # else if entry.sold_out_temporarily
+          #   item += ' [Temporarily sold out]'
+          # else if entry.qty <= 10
+          #   item += ' [Almost sold out!]'
           messages.push "#{index++}. #{entry.name}\n #{entry.image.original}\n"
         for message in messages
          msg.send message
