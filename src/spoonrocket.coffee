@@ -22,7 +22,7 @@ module.exports = (robot) =>
     # https://api.spoonrocket.com/userapi/zones
     zones = {
         sf: {
-          id: 2,wh
+          id: 2,
           name: "San Francisco"
         },
         eastbay: {
