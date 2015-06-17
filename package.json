@@ -1,8 +1,8 @@
 {
-  "name": "oo-hubot-spoonrocket",
+  "name": "oo-bot-behaviors",
   "version": "1.1.0",
   "author": "Albert Lo",
-  "description": "A Hubot plugin to tell you what SpoonRocket has today with picture.",
+  "description": "A Hubot plugin for Scalable Press",
   "keywords": [
     "github",
     "hubot",
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonursenbach/hubot-spoonrocket.git"
+    "url": "https://github.com/BertLo/oo-bot-behaviors"
   },
   "main": "index.coffee",
   "dependencies": {

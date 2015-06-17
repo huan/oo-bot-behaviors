@@ -16,7 +16,7 @@ moment = require 'moment'
 priceThreshold = 7
 
 module.exports = (robot) =>
-  robot.respond /feed me( (sf|eastbay)?)?$/i, (msg) ->
+  robot.hear /feed me( (sf|eastbay)?)?$/i, (msg) ->
     location = if msg.match[1] then msg.match[1].trim() else 'eastbay'
     now = moment().format('HH:MM')
 
