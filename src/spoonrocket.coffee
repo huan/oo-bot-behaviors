@@ -61,4 +61,4 @@ module.exports = (robot) =>
           messages.push "#{index++} entry.name"
           messages.push entry.image.original
 
-        msg.send emit messages
+        msg.send messages
