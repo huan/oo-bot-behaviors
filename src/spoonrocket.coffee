@@ -13,6 +13,7 @@
 #   jonursenbach
 
 moment = require 'moment'
+priceThreshold = 7
 
 module.exports = (robot) =>
   robot.respond /spoonrocket( (sf|eastbay)?)?$/i, (msg) ->
@@ -50,7 +51,7 @@ module.exports = (robot) =>
 
         messages = []
         index = 1
-        for entry in resp.menu when !entry.sold_out_for_the_day && !entry.sold_out_temporarily
+        for entry in resp.menu when entry.price > priceThreshold !entry.sold_out_for_the_day && !entry.sold_out_temporarily
           item = '· ' + entry.name + ' ($' + entry.price + '): ' + entry.description + ' (' + entry.properties + ')'
           if entry.qty <= 0 || entry.sold_out_for_the_day
             item += ' [SOLD OUT]'
