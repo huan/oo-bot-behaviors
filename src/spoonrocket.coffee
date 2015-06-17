@@ -16,13 +16,13 @@ moment = require 'moment'
 
 module.exports = (robot) =>
   robot.respond /spoonrocket( (sf|eastbay)?)?$/i, (msg) ->
-    location = if msg.match[1] then msg.match[1].trim() else 'sf'
+    location = if msg.match[1] then msg.match[1].trim() else 'eastbay'
     now = moment().format('HH:MM')
 
     # https://api.spoonrocket.com/userapi/zones
     zones = {
         sf: {
-          id: 2,
+          id: 2,wh
           name: "San Francisco"
         },
         eastbay: {
@@ -47,9 +47,10 @@ module.exports = (robot) =>
           return msg.send "Sorry, SpoonRocket is currently closed in " + zone.name + "."
 
         emit = 'Today\'s SpoonRocket menu is:' + "\n\n";
-        menu = []
 
-        for entry in resp.menu
+        messages = []
+        index = 1
+        for entry in resp.menu when !entry.sold_out_for_the_day && !entry.sold_out_temporarily
           item = '· ' + entry.name + ' ($' + entry.price + '): ' + entry.description + ' (' + entry.properties + ')'
           if entry.qty <= 0 || entry.sold_out_for_the_day
             item += ' [SOLD OUT]'
@@ -57,11 +58,7 @@ module.exports = (robot) =>
             item += ' [Temporarily sold out]'
           else if entry.qty <= 10
             item += ' [Almost sold out!]'
+          messages.push "#{index++} entry.name"
+          messages.push entry.image.original
 
-          menu.push(item)
-
-        emit += menu.join("\n")
-
-        emit += "\n\n" + 'Order: https://www.spoonrocket.com/'
-
-        msg.send emit
+        msg.send emit messages
