@@ -59,6 +59,6 @@ module.exports = (robot) =>
           #   item += ' [Temporarily sold out]'
           # else if entry.qty <= 10
           #   item += ' [Almost sold out!]'
-          messages.push "#{index++}. #{entry.name}\n #{entry.image.original}\n"
+          messages.push "#{entry.name}\n #{entry.image.original}\n"
         for message in messages
          msg.send message
