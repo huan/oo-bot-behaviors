@@ -3,7 +3,7 @@ moment = require 'moment'
 module.exports = (robot) =>
 
   robot.hear /costco/g, (msg) ->
-    msg.send "Costco heard"
+    msg.send "http://imgur.com/nMMLv8n"
 
   priceThreshold = 7
   robot.respond /feed me( (sf|eastbay)?)?$/i, (msg) ->
