@@ -32,7 +32,6 @@ module.exports = (robot) =>
         resp = JSON.parse(body)
 
         return msg.send "Sorry, SpoonRocket in " + zone.name + " is currently inactive." if !resp.active
-        return msg.send "Sorry, SpoonRocket hasn't opened yet in " + zone.name + "." if now < resp.opening_time
 
         if now >= resp.closing_time && resp.closing_time != '00:00'
           return msg.send "Sorry, SpoonRocket is currently closed in " + zone.name + "."
