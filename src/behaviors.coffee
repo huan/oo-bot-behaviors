@@ -39,7 +39,7 @@ module.exports = (robot) =>
         emit = 'Today\'s SpoonRocket menu is:' + "\n\n";
 
         messages = []
-        for entry in resp.menu when entry.price > priceThreshold && !entry.sold_out_for_the_day && !entry.sold_out_temporarily && entry.name.indexOf("T-Shirt") == -1
+        for entry in resp.menu when entry.price >= priceThreshold && !entry.sold_out_for_the_day && !entry.sold_out_temporarily && entry.name.indexOf("T-Shirt") == -1
           messages.push "#{entry.name}\n #{entry.image.original}\n"
         for message in messages
          msg.send message
