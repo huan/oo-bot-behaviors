@@ -38,9 +38,18 @@ module.exports = (robot) =>
 
         emit = 'Today\'s SpoonRocket menu is:' + "\n\n";
 
+        entries = {}
+
+        for entry in resp.menu when entry.type != 'dessert' && entry.type != 'beverage'
+          entries[entry.id] =
+            name: entry.name
+            properties: entry.properties
+            description: entry.description
+            image: entry.image.original
+
         messages = []
-        for entry in resp.menu when entry.price >= priceThreshold && !entry.sold_out_for_the_day && !entry.sold_out_temporarily && entry.name.indexOf("T-Shirt") == -1 && entry.name.indexOf("Smoothie") == -1
-          messages.push "#{entry.name}\n #{entry.image.original}\n"
+        for id, entry of entries
+          messages.push "#{entry.name} - #{properties}\n#{entry.description}\n#{entry.image.original}\n"
         for message in messages
          msg.send message
 
