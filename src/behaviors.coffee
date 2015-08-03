@@ -43,12 +43,12 @@ module.exports = (robot) =>
         for entry in resp.menu when entry.type != 'dessert' && entry.type != 'beverage'
           entries[entry.id] =
             name: entry.name
-            properties: entry.properties
+            properties: " - #{entry.properties}"
             description: entry.description
             image: entry.image.original
 
         messages = []
         for id, entry of entries
-          messages.push "#{entry.name} - #{entry.properties}\n#{entry.description}\n#{entry.image.original}\n"
+          messages.push "#{entry.name}#{entry.properties}\n#{entry.description}\n#{entry.image.original}\n"
         for message in messages
          msg.send message
